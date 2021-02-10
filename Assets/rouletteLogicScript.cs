@@ -9,6 +9,7 @@ public class rouletteLogicScript : MonoBehaviour
     [SerializeField] int[] chamber = { 0, 0, 0, 0, 0, 6 };
     [SerializeField] int[] spunChamber = { 0, 0, 0, 0, 0, 6 };
     [SerializeField] int currentRound = 0;
+    int[] tempArray;
 
     public void fire()
     {
@@ -23,6 +24,7 @@ public class rouletteLogicScript : MonoBehaviour
         {
             Debug.Log("BLAM!!");
             spin(Random.Range(1, 7));
+            currentRound = 0;
         }
         else
         {
@@ -33,14 +35,23 @@ public class rouletteLogicScript : MonoBehaviour
     //kill this once you have the spin minigame
     public void spinHelper()
     {
-        spin(Random.Range(0, 100));
+        spin(Random.Range(1, 7));
     }
 
     public void spin(int num)
     {
-        var randomNum = new Random();
-        spunChamber = chamber.OrderBy(x => num).ToArray();
-        Debug.Log("chamber spun!");
+        for(int times2Do = 0; times2Do < num; times2Do++)
+        {
+            tempArray = spunChamber;
+            int tempChamber = tempArray[5];
+            for (int i = 4; i >= 0; i--)
+            {
+                tempArray[i + 1] = tempArray[i];
+            }
+            tempArray[0] = tempChamber;
+            spunChamber = tempArray;
+        }
+        takeAPeek();
     }
 
     public void takeAPeek()
