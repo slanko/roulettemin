@@ -476,7 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff19aa6d9c36a4347856c9f19373b8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chambers: 000000000000
+  chamber: 000000000000000000000000000000000000000006000000
+  spunChamber: 000000000000000000000000000000000000000006000000
+  currentRound: 0
 --- !u!65 &466508876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1647,7 +1649,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1181424178}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466508875}
+        m_TargetAssemblyTypeName: rouletteLogicScript, Assembly-CSharp
+        m_MethodName: spinHelper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1181424178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2031,7 +2045,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1809260778}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466508874}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1809260778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2379,7 +2405,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1932874082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466508875}
+        m_TargetAssemblyTypeName: rouletteLogicScript, Assembly-CSharp
+        m_MethodName: takeAPeek
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1932874082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,7 +2702,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2125977168}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466508875}
+        m_TargetAssemblyTypeName: rouletteLogicScript, Assembly-CSharp
+        m_MethodName: fire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2125977168
 MonoBehaviour:
   m_ObjectHideFlags: 0
