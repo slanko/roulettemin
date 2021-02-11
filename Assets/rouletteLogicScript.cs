@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class rouletteLogicScript : MonoBehaviour
 {
@@ -113,5 +114,10 @@ void UIBackDown()
             }
             i++;
         }
+    }
+
+    public void quitGame()
+    {
+        SceneManager.LoadScene("menu");
     }
 }

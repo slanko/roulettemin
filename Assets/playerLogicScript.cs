@@ -19,6 +19,11 @@ public class playerLogicScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(PlayerPrefs.GetInt("playerCount") != 0)
+        {
+            playerCount = PlayerPrefs.GetInt("playerCount");
+        }
+
         initializeSpawnPoints();
         initializePlayers();
         setCurrentPlayer();
