@@ -8,13 +8,18 @@ public class rouletteminScript : MonoBehaviour
     public string faceNormal, faceTense, faceDead;
     public int myNum;
     public GameObject placeInLine;
-    void Start()
-    {
-        
-    }
+    [SerializeField] float lerpSpeed;
+    public bool dead = false;
+    Animator anim;
 
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     void Update()
     {
-        transform.position = placeInLine.transform.position;
+        transform.position = Vector3.Lerp(transform.position, placeInLine.transform.position, lerpSpeed);
+        anim.SetBool("dead", dead);
     }
 }

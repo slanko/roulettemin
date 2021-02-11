@@ -10,6 +10,12 @@ public class rouletteLogicScript : MonoBehaviour
     [SerializeField] int[] spunChamber = { 0, 0, 0, 0, 0, 6 };
     [SerializeField] int currentRound = 0;
     int[] tempArray;
+    [SerializeField] Animator gunAnim;
+
+    private void Start()
+    {
+        spin(Random.Range(1, 7));
+    }
 
     public void fire()
     {
@@ -22,12 +28,14 @@ public class rouletteLogicScript : MonoBehaviour
 
         if(spunChamber[currentRound] == 6)
         {
+            gunAnim.SetTrigger("fire");
             Debug.Log("BLAM!!");
             spin(Random.Range(1, 7));
             currentRound = 0;
         }
         else
         {
+            gunAnim.SetTrigger("nofire");
             Debug.Log("click...");
         }
     }

@@ -28,7 +28,7 @@ public class playerLogicScript : MonoBehaviour
     {
         int currentPlayer = 1;
         //do bottom half
-        for(int i = (int)Mathf.Ceil(spawnPoints.Count / 2); i <= (int)Mathf.Ceil(spawnPoints.Count / 2) && i >= 0; i--)
+        for(int i = Mathf.CeilToInt(spawnPoints.Count / 2); i <= Mathf.CeilToInt(spawnPoints.Count / 2) && i >= 0; i--)
         {
             GameObject playuh = Instantiate(playerObject);
             players.Add(playuh);
@@ -39,7 +39,7 @@ public class playerLogicScript : MonoBehaviour
         }
 
         //do top half
-        for(int i = spawnPoints.Count - 1; i > (int)Mathf.Ceil(spawnPoints.Count / 2); i--)
+        for(int i = spawnPoints.Count - 1; i > Mathf.CeilToInt(spawnPoints.Count / 2); i--)
         {
             GameObject playuh = Instantiate(playerObject);
             players.Add(playuh);
@@ -68,5 +68,16 @@ public class playerLogicScript : MonoBehaviour
             }
         }
         spawnPoints = spawnPoints.OrderBy(x => x.transform.position.x).ToList();
+    }
+
+    public void killPlayer()
+    {
+        rouletteminScript currentPlayerScript = players[0].GetComponent<rouletteminScript>();
+        currentPlayerScript.dead = true;
+    }
+
+    void moveLine()
+    {
+
     }
 }
