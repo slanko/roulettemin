@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class rouletteLogicScript : MonoBehaviour
 {
     //i forget how this works. thank you anteater please do not shoot me
     [SerializeField] int[] chamber = { 0, 0, 0, 0, 0, 6 };
-    [SerializeField] int[] spunChamber = { 0, 0, 0, 0, 0, 6 };
+    [SerializeField] int[] spunChamber;
     [SerializeField] int currentRound = 0;
     int[] tempArray;
-    [SerializeField] Animator gunAnim;
+    [SerializeField] Animator gunAnim, UIAnim;
+    public Button[] menuButtons;
+    [SerializeField] GameObject[] UIBullets;
 
     private void Start()
     {
+        spunChamber = chamber;
         spin(Random.Range(1, 7));
     }
 
@@ -59,7 +63,7 @@ public class rouletteLogicScript : MonoBehaviour
             tempArray[0] = tempChamber;
             spunChamber = tempArray;
         }
-        takeAPeek();
+        gunAnim.SetTrigger("spin");
     }
 
     public void takeAPeek()
@@ -67,7 +71,7 @@ public class rouletteLogicScript : MonoBehaviour
         string stringOutput = "";
         foreach (int chamber in spunChamber)
         {
-            if(chamber == 0)
+            if (chamber == 0)
             {
                 stringOutput = stringOutput + "◯";
             }
@@ -77,6 +81,37 @@ public class rouletteLogicScript : MonoBehaviour
             }
         }
         Debug.Log(stringOutput);
+        SyncUIBullets();
+        UIAnim.SetBool("Peek Up", true);
+        Invoke("UIBackDown", 3);
+    }
+void UIBackDown()
+    {
+        UIAnim.SetBool("Peek Up", false);
     }
 
+    public void toggleButtonUsability(bool togg)
+    {
+        foreach(Button currentButton in menuButtons)
+        {
+            currentButton.interactable = togg;
+        }
+    }
+
+    void SyncUIBullets()
+    {
+        int i = 0;
+        foreach(GameObject bullet in UIBullets)
+        {
+            if(spunChamber[i] == 0)
+            {
+                bullet.SetActive(false);
+            }
+            if(spunChamber[i] == 6)
+            {
+                bullet.SetActive(true);
+            }
+            i++;
+        }
+    }
 }

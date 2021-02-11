@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class playerLogicScript : MonoBehaviour
@@ -8,20 +9,19 @@ public class playerLogicScript : MonoBehaviour
     [SerializeField] List<GameObject> spawnPoints;
     [SerializeField] int playerCount;
     [SerializeField] GameObject spawnPoint;
-    [SerializeField] List<GameObject> players;
+    //currentplayers exists because players was getting desynced so i shuffled a seperate identical list to make that not happen
+    [SerializeField] List<GameObject> players, currentPlayers;
     [SerializeField] GameObject playerObject;
+    [SerializeField] List<GameObject> placesInLineForShuffle;
+    [SerializeField] Text playerText, roundText; 
+    GameObject[] tempArray;
 
     // Start is called before the first frame update
     void Start()
     {
         initializeSpawnPoints();
         initializePlayers();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        setCurrentPlayer();
     }
 
     void initializePlayers()
@@ -48,6 +48,7 @@ public class playerLogicScript : MonoBehaviour
             playerScript.myNum = currentPlayer;
             currentPlayer++;
         }
+        currentPlayers = players;
     }
 
     void initializeSpawnPoints()
@@ -72,12 +73,69 @@ public class playerLogicScript : MonoBehaviour
 
     public void killPlayer()
     {
-        rouletteminScript currentPlayerScript = players[0].GetComponent<rouletteminScript>();
+        rouletteminScript currentPlayerScript = currentPlayers[0].GetComponent<rouletteminScript>();
         currentPlayerScript.dead = true;
     }
-
-    void moveLine()
+    public void setCurrentPlayer()
     {
+        rouletteminScript currentPlayer = currentPlayers[0].GetComponent<rouletteminScript>();
+        if(currentPlayer.dead == true)
+        {
+            moveLine();
+        }
+        else
+        {
+            playerText.text = "PLAYER\n" + currentPlayer.myNum;
+        }
+    }
 
+    public void moveLine()
+    {
+        if(placesInLineForShuffle.Count > 0)
+        {
+            placesInLineForShuffle.Clear();
+        }
+        //take current positions
+        foreach(GameObject player in players)
+        {
+            rouletteminScript currentPlayer = player.GetComponent<rouletteminScript>();
+            placesInLineForShuffle.Add(currentPlayer.placeInLine);
+        }
+        //shuffle positions
+        tempArray = placesInLineForShuffle.ToArray();
+        GameObject tempPlace = tempArray[tempArray.Length - 1];
+        for(int i = tempArray.Length - 2; i >= 0; i--)
+        {
+            tempArray[i + 1] = tempArray[i];
+        }
+        tempArray[0] = tempPlace;
+        //set positions back
+        int index = 0;
+        foreach(GameObject player in players)
+        {
+            rouletteminScript currentPlayer = player.GetComponent<rouletteminScript>();
+            currentPlayer.placeInLine = tempArray[index];
+            index++;
+        }
+        //shuffle player list to keep sync
+        tempArray = new GameObject[players.Count];
+        tempArray = currentPlayers.ToArray();
+        //DO THIS BACKWARDS
+        /*
+        GameObject tempPlayer = tempArray[tempArray.Length - 1];
+        for (int i = tempArray.Length - 2; i >= 0; i--)
+        {
+            tempArray[i + 1] = tempArray[i];
+        }
+        tempArray[0] = tempPlayer;
+        */
+        GameObject tempPlayer = tempArray[0];
+        for(int i = 1; i < tempArray.Length; i++)
+        {
+            tempArray[i - 1] = tempArray[i];
+        }
+        tempArray[tempArray.Length - 1] = tempPlayer;
+        currentPlayers = tempArray.ToList();
+        setCurrentPlayer();
     }
 }
