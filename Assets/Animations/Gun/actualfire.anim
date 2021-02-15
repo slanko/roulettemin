@@ -1519,10 +1519,45 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.033333335
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 0e438703e3a54d14e96448230fcc1880, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a6cf5f174cb1fbe4bba23dfc471c3b27, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.05
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: c04ac4ee50f9d884ab9e000a2dc575bf, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0666667
     functionName: killPlayerHelper
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0833334
+    functionName: advanceRound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5333333
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a6cf5f174cb1fbe4bba23dfc471c3b27, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class playerLogicScript : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class playerLogicScript : MonoBehaviour
     [SerializeField] int playerCount;
     [SerializeField] GameObject spawnPoint;
     //currentplayers exists because players was getting desynced so i shuffled a seperate identical list to make that not happen
-    [SerializeField] List<GameObject> players, currentPlayers;
+    public List<GameObject> players, currentPlayers;
     [SerializeField] GameObject playerObject;
     [SerializeField] List<GameObject> placesInLineForShuffle;
-    [SerializeField] Text playerText, roundText; 
+    [SerializeField] Text playerText;
+    [SerializeField] Text winText;
+    [SerializeField] Button passButton, peekButton, spinButton;
+    [SerializeField] Text passText, peekText, spinText;
     GameObject[] tempArray;
+    rouletteminScript lastAlivePlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +32,7 @@ public class playerLogicScript : MonoBehaviour
         initializeSpawnPoints();
         initializePlayers();
         setCurrentPlayer();
+        checkWin();
     }
 
     void initializePlayers()
@@ -80,6 +86,31 @@ public class playerLogicScript : MonoBehaviour
     {
         rouletteminScript currentPlayerScript = currentPlayers[0].GetComponent<rouletteminScript>();
         currentPlayerScript.dead = true;
+        checkWin();
+    }
+    void checkWin()
+    {
+        int alivePlayers = 0;
+        foreach(GameObject player in players)
+        {
+            rouletteminScript playerScript = player.GetComponent<rouletteminScript>();
+            if(playerScript.dead == false)
+            {
+                alivePlayers++;
+                lastAlivePlayer = playerScript;
+            }
+        }
+        if(alivePlayers == 1)
+        {
+            winText.text = "PLAYER " + lastAlivePlayer.myNum + " WINS!!";
+            winText.gameObject.SetActive(true);
+            Invoke("returnToMainMenu", 3);
+        }
+    }
+
+    void returnToMainMenu()
+    {
+        SceneManager.LoadScene("menu");
     }
     public void setCurrentPlayer()
     {
@@ -92,6 +123,7 @@ public class playerLogicScript : MonoBehaviour
         {
             playerText.text = "PLAYER\n" + currentPlayer.myNum;
         }
+        checkButtons();
     }
 
     public void moveLine()
@@ -142,5 +174,44 @@ public class playerLogicScript : MonoBehaviour
         tempArray[tempArray.Length - 1] = tempPlayer;
         currentPlayers = tempArray.ToList();
         setCurrentPlayer();
+    }
+    public void extraPassStuff()
+    {
+        rouletteminScript currentPlayerScript = currentPlayers[0].GetComponent<rouletteminScript>();
+        currentPlayerScript.passLeft--;
+    }
+
+    public void checkButtons()
+    {
+        rouletteminScript currentPlayerScript = currentPlayers[0].GetComponent<rouletteminScript>();
+        passText.text = "x" + currentPlayerScript.passLeft;
+        peekText.text = "x" + currentPlayerScript.peekLeft;
+        spinText.text = "x" + currentPlayerScript.spinLeft;
+        if (currentPlayerScript.passLeft > 0)
+        {
+            passButton.interactable = true;
+        }
+        else
+        {
+            passButton.interactable = false;
+        }
+
+        if (currentPlayerScript.peekLeft > 0)
+        {
+            peekButton.interactable = true;
+        }
+        else
+        {
+            peekButton.interactable = false;
+        }
+
+        if (currentPlayerScript.spinLeft > 0)
+        {
+            spinButton.interactable = true;
+        }
+        else
+        {
+            spinButton.interactable = false;
+        }
     }
 }

@@ -1447,6 +1447,27 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.033333335
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 0e438703e3a54d14e96448230fcc1880, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a6cf5f174cb1fbe4bba23dfc471c3b27, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.05
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 38e4d22c5b0d3bc49a3be44d07c677e3, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.1666666
     functionName: buttonToggleOn
     data: 

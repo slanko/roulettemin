@@ -368,6 +368,20 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 722b7c448d665754fa74b982de87b1da, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: playSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a6cf5f174cb1fbe4bba23dfc471c3b27, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1
     functionName: buttonToggleOn
     data: 

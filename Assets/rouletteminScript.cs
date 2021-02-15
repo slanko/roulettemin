@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class rouletteminScript : MonoBehaviour
 {
     public int passLeft, peekLeft, spinLeft;
-    public string faceNormal, faceTense, faceDead;
     public int myNum;
     public GameObject placeInLine;
     [SerializeField] float lerpSpeed;
